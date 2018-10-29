@@ -28,7 +28,7 @@ SECRET_KEY = '_6&kjdaqv01b1zgo=s5!%z0z3(6czy^obm)h8r)lm*m_myamn_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [u'localhost', u'immense-tundra-56568.herokuapp.com']
+ALLOWED_HOSTS = [u'localhost', u'guarded-bayou-62436.herokuapp.com']
 
 
 # Application definition
