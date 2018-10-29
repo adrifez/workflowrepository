@@ -4,11 +4,13 @@ from __future__ import unicode_literals
 from django.db import models
 from django.template.defaultfilters import slugify
 
+import datetime
+
 class Category(models.Model):
-	name = models.CharField(_("Name"), max_length=128, unique=True, blank=false)
-	slug = models.SlugField(_("Slug"), unique=True)
-	created = models.DateField(_("Date"), default=datetime.date.today)
-	tooltip = models.CharField(_("Tooltip"), max_length=128)
+	name = models.CharField(max_length=128, unique=True, blank=False)
+	slug = models.SlugField(unique=True)
+	created = models.DateField(default=datetime.date.today)
+	tooltip = models.CharField(max_length=128)
 
 
 	def save(self, *args, **kwargs):
@@ -22,14 +24,22 @@ class Category(models.Model):
 		return self.name
 
 class Workflow(models.Model):
-	name = models.CharField(max_length=128, unique=True, blank=false)
+	name = models.CharField(max_length=128, unique=True, blank=False)
 	slug = models.SlugField(unique=True)
 	description = models.CharField(max_length=512, default="")
+	views = models.IntegerField(default=0)
+	downloads = models.IntegerField(default=0)
+	versionInit = models.CharField(max_length=128)
+	category = models.ManyToManyField(Category, blank=False)
+	client_ip = models.GenericIPAddressField()
+	keywords = models.CharField(max_length=256, default="")
+	json = models.TextField()
+	created =  models.DateField(default=datetime.date.today)
 
 
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.name)
-		super(Category, self).save(*args, **kwargs)
+		super(Workflow, self).save(*args, **kwargs)
 
 	class Meta:
 		verbose_name_plural = 'Workflows'
