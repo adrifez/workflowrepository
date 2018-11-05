@@ -23,7 +23,7 @@ class Category(models.Model):
 	def __str__(self): # For Python 2, use __unicode__ too
 		return self.name
 
-class Workflow(models.Model):
+class WorkFlow(models.Model):
 	name = models.CharField(max_length=128, unique=True, blank=False)
 	slug = models.SlugField(unique=True)
 	description = models.CharField(max_length=512, default="")
@@ -39,7 +39,7 @@ class Workflow(models.Model):
 
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.name)
-		super(Workflow, self).save(*args, **kwargs)
+		super(WorkFlow, self).save(*args, **kwargs)
 
 	class Meta:
 		verbose_name_plural = 'Workflows'
