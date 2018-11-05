@@ -78,20 +78,21 @@ deserunt mollit anim id est laborum."""[init:end]
         # create fake json
         try:
             cats = Category.objects.all()
+            json = self.getJson()
+            for i in xrange(1, noWorkFlows + 1):
+                cat = random.choice(cats)
+                ip = ".".join(str(random.randint(0, 255)) for _ in range(4))
+
+                work = WorkFlow.objects.get_or_create(name='workflow ' + str(i), description='description ' + str(i),
+                    versionInit='1.0', client_ip=ip, keywords='keywords ' + str(i), json=json)[0]
+                work.category.add(cat)
+                work.save()
+                pass
+            print WorkFlow.objects.all()
         except ObjectDoesNotExist:
             print "Error al anadir workflow, no se han encontrado categorias"
 
-        json = self.getJson()
-        for i in xrange(1, noWorkFlows + 1):
-            cat = random.choice(cats)
-            ip = ".".join(str(random.randint(0, 255)) for _ in range(4))
-
-            work = WorkFlow.objects.get_or_create(name='workflow ' + str(i), description='description ' + str(i),
-                versionInit='1.0', client_ip=ip, keywords='keywords ' + str(i), json=json)[0]
-            work.category.add(cat)
-            work.save()
-            pass
-        print WorkFlow.objects.all()
+        
 
     def getJson(self):
         return """[

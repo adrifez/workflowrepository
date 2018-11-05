@@ -33,7 +33,7 @@ class WorkFlow(models.Model):
 	category = models.ManyToManyField(Category, blank=False)
 	client_ip = models.GenericIPAddressField()
 	keywords = models.CharField(max_length=256, default="")
-	json = models.TextField()
+	json = models.TextField(default="")
 	created =  models.DateField(default=datetime.date.today)
 
 
