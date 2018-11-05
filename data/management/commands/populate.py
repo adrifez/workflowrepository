@@ -56,8 +56,11 @@ deserunt mollit anim id est laborum."""[init:end]
     def cleanDatabase(self):
         # delete all
         # workFlows and  categories
-        WorkFlow.objects.all().delete()
-        Category.objects.all().delete()
+        try:
+            WorkFlow.objects.all().delete()
+            Category.objects.all().delete()
+        except Exception:
+            print 'No existen datos en la base de datos'
 
     def addCategory(self, noCategories):
         # create 5 categories <<<<<<<<<<<<<<<<<<<<<<<
