@@ -67,7 +67,7 @@ deserunt mollit anim id est laborum."""[init:end]
         # baseName, call objects
         # print Category.objects.all()
         for i in xrange(1, noCategories + 1):
-            cat = Category.objects.get_or_create(name='category ' + str(i), tooltip='tooltip' + str(i))[0]
+            cat = Category.objects.create(name='category ' + str(i), tooltip='tooltip' + str(i))
             cat.save()
             pass
         print Category.objects.all()
@@ -86,8 +86,8 @@ deserunt mollit anim id est laborum."""[init:end]
                 cat = random.choice(cats)
                 ip = ".".join(str(random.randint(0, 255)) for _ in range(4))
 
-                work = WorkFlow.objects.get_or_create(name='workflow ' + str(i), description='description ' + str(i),
-                    versionInit='1.0', client_ip=ip, keywords='keywords ' + str(i), json=json)[0]
+                work = WorkFlow.objects.create(name='workflow ' + str(i), description='description ' + str(i),
+                    versionInit='1.0', client_ip=ip, keywords='keywords ' + str(i), json=json)
                 work.category.add(cat)
                 work.save()
                 pass
