@@ -1,0 +1,118 @@
+{% extends 'data/base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Workflows{% endblock %}
+
+{% block side_block %}
+	<h3>Categories</h3>
+    <ul>
+        <li class="selected">
+            <a href="/workflow_list/">All</a>
+        </li>
+    
+        <li >
+            <a title="tooltip_category1" href="/workflow_list/category1/">category1</a>
+        </li>
+    
+        <li >
+            <a title="tooltip_category2" href="/workflow_list/category2/">category2</a>
+        </li>
+    
+        <li >
+            <a title="tooltip_category3" href="/workflow_list/category3/">category3</a>
+        </li>
+    
+        <li >
+            <a title="tooltip_category4" href="/workflow_list/category4/">category4</a>
+        </li>
+    
+        <li >
+            <a title="tooltip_category5" href="/workflow_list/category5/">category5</a>
+        </li>
+    </ul>
+
+    <h3>
+        <a href="/add_workflow/"> Upload workflow </a>
+    </h3>
+{% endblock %}
+
+{% block main_block %}
+
+    <h1>Workflows</h1>
+        
+    <div class="item"><p>
+        <a href="/workflow_detail/36/hola/">hola</a>:
+        esto es un hola</p>
+    </div>
+
+    <div class="item"><p>
+        <a href="/workflow_detail/1/workflow1/">workflow1</a>:
+        olor sit amet, consectetur adipiscing elit,
+sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+nisi ut ali</p>
+    </div>
+
+    <div class="item"><p>
+        <a href="/workflow_detail/10/workflow10/">workflow10</a>:
+        ing elit,
+sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco lab</p>
+    </div>
+
+    <div class="item"><p>
+        <a href="/workflow_detail/11/workflow11/">workflow11</a>:
+        it amet, consectetur adipiscing elit,
+sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud e</p>
+    </div>
+
+    <div class="item"><p>
+        <a href="/workflow_detail/12/workflow12/">workflow12</a>:
+        adipiscing elit,
+sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+reprehenderit in voluptate velit es...</p>
+    </div>
+
+    <div class="item"><p>
+        <a href="/workflow_detail/13/workflow13/">workflow13</a>:
+         amet, consectetur adipiscing elit,
+sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+nisi ut aliquip ex ea commodo consequat. Duis aute irure dolo</p>
+    </div>
+
+    <div class="item"><p>
+        <a href="/workflow_detail/2/workflow2/">workflow2</a>:
+        ipsum dolor sit amet, consectetur adipiscing elit,
+sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+nisi ut </p>
+    </div>
+
+    <div class="item"><p>
+        <a href="/workflow_detail/3/workflow3/">workflow3</a>:
+        ectetur adipiscing elit,
+sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+nisi ut aliquip ex ea commodo</p>
+    </div>
+
+
+    <div id="pagination">
+        <ul>
+            <li class="disabled"><span>«</span></li>
+
+            <li class="active"><span>1 <span class="sr-only">(current),</span></span></li>
+
+            <li><a href="?page=2">2,</a></li>
+
+            <li><a href="?page=2">»</a></li>
+
+        </ul>
+  </div>
+
+{% endblock %}

@@ -28,7 +28,7 @@ SECRET_KEY = '_6&kjdaqv01b1zgo=s5!%z0z3(6czy^obm)h8r)lm*m_myamn_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [u'localhost', u'guarded-bayou-62436.herokuapp.com']
+ALLOWED_HOSTS = [u'localhost', u'127.0.0.1', u'guarded-bayou-62436.herokuapp.com']
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'data',
+    'find',
 ]
 
 MIDDLEWARE = [
