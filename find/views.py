@@ -54,3 +54,18 @@ def workflow_list(request, category_slug=None):
     }
 
     return render(request, 'find/list.html', _dict)
+
+def workflow_detail(request, id, slug):
+    #Your code goes here
+    try:
+        workflow = WorkFlow.objects.get(slug=slug)
+    except Exception:
+            result = False
+            error += 'No existen workflows en la base de datos'
+    #query that returns the workflow with id=id
+    _dict = {}
+    _dict[’result’] = result      # False if no workflow satisfices the query
+    _dict[’workflow’] = workflow  # workflow with id = id
+    _dict[’error’] = error        # message to display if results == False
+    
+    return render(request, ’find/detail.html’, _dict)
