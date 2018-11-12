@@ -29,13 +29,11 @@
         
             <div class="pure-g" xmlns:find="http://www.w3.org/1999/xhtml">
 
-                <div id="sidebar" class="pure-u-1-5">
-                    {% block side_block %}{% endblock %}
-                </div>
-
-                <div id="main">
-                    {% block main_block %}{% endblock %}
-                </div>
+                
+                {% block side_block %}{% endblock %}
+                
+                {% block main_block %}{% endblock %}
+                
             </div> <!-- Grid -->
 
         </div>

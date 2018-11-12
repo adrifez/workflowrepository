@@ -57,11 +57,12 @@ def workflow_list(request, category_slug=None):
 
 def workflow_detail(request, id, slug):
     #Your code goes here
+    result = True
     try:
         workflow = WorkFlow.objects.get(slug=slug)
     except Exception:
             result = False
-            error += 'No existen workflows en la base de datos'
+            error += 'No existe ese workflow en la base de datos'
     #query that returns the workflow with id=id
     _dict = {}
     _dict[’result’] = result      # False if no workflow satisfices the query
