@@ -5,7 +5,7 @@
 {% block title %}Workflows{% endblock %}
 
 {% block side_block %}
-    
+
     <div id="sidebar" class="pure-u-1-5">
     	<h3>Categories</h3>
         <ul>
@@ -41,17 +41,17 @@
                 <h1>{{ category.name }}</h1>
             {% else %}
                 <h1>Workflows</h1>
-            {% endif %}    
+            {% endif %}
 
                 {% for workflow in workflows %}
                     <div class="item"><p>
                         <a href="{% url 'workflow_detail' workflow.id workflow.slug %}"> {{ workflow.name }}</a>:
-                        {{ workflow.description }}</p>
+                        {{ workflow.description|truncate(255) }}</p>
                     </div>
                 {% endfor %}
 
         {% else %}
-            <p><strong> {{ error }}</strong></p>  
+            <p><strong> {{ error }}</strong></p>
         {% endif %}
 
         <div id="pagination">

@@ -8,6 +8,8 @@ import json
 
 from data.models import Category, WorkFlow
 
+from rango.forms import SearchForm
+
 # Create your views here.
 
 def workflow_list(request, category_slug=None):
@@ -79,3 +81,30 @@ def workflow_detail(request, id, slug):
     _dict['categories'] = cats      # LOS ZETAS
 
     return render(request, 'find/detail.html', _dict)
+
+def workflow_search (request):
+    form = SearchForm()
+
+    _dict = {}
+    result = False;
+    workflow = None
+    error = ''
+
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        #No se si hacerlo como en SI (estoy esperando al profe)
+        #request.POST.get(nombre_input)
+
+        if form.is_valid():
+            workflow = WorkFlow.objects.get(name=form.search)
+            result = True;
+
+        else:
+            error = 'No results'
+
+        _dict[’result’] = result      # False if no workflow satisfices the query
+        _dict[’workflow’] = workflow  # workflow with name = name
+        _dict[’error’] = error        # message to display if results == False
+
+
+    return render(request, ’find/detail.html’, _dict)

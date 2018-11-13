@@ -17,7 +17,7 @@
 
         <div id="subheader">
             <div class="search">
-                <form action="/workflow_search/" method="post">
+                <form action="{% url 'worflow_search' %}" method="post">
                     Search Workflow <input type="text" name="key" maxlength="128">
                     <input type="submit" name="byName" value="by Name">
                 </form>
@@ -26,13 +26,13 @@
 
 
         <div id="content">
-        
+
             <div class="pure-g" xmlns:find="http://www.w3.org/1999/xhtml">
 
                 {% block side_block %}{% endblock %}
-                
+
                 {% block main_block %}{% endblock %}
-                
+
             </div> <!-- Grid -->
 
         </div>
@@ -40,9 +40,8 @@
         <footer id="footer" class="footerStyle">
             Adrián Fernández, Ricardo Riol
         </footer>
-    
+
     </body>
 
 
 </html>
-
