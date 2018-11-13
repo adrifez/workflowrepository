@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
+from django.http import HttpResponse
 
 import json
 
@@ -58,15 +59,23 @@ def workflow_list(request, category_slug=None):
 def workflow_detail(request, id, slug):
     #Your code goes here
     result = True
+    workflow = None
+    error = ''
+    cats = []
+
     try:
         workflow = WorkFlow.objects.get(slug=slug)
+        for cat in workflow.category.all():
+            cats.append(cat)
     except Exception:
             result = False
             error += 'No existe ese workflow en la base de datos'
+
     #query that returns the workflow with id=id
     _dict = {}
-    _dict[’result’] = result      # False if no workflow satisfices the query
-    _dict[’workflow’] = workflow  # workflow with id = id
-    _dict[’error’] = error        # message to display if results == False
-    
-    return render(request, ’find/detail.html’, _dict)
+    _dict['result'] = result        # False if no workflow satisfices the query
+    _dict['workflow'] = workflow    # workflow with id = id
+    _dict['error'] = error          # message to display if results == False
+    _dict['categories'] = cats      # LOS ZETAS
+
+    return render(request, 'find/detail.html', _dict)

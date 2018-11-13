@@ -63,16 +63,16 @@ class Command(BaseCommand):
         #Category of workflow with slug workflow-1
         try:
             work = WorkFlow.objects.get(slug='workflow-1')
-            cat = work.category
-            print cat.slug
+            for cat in work.category.all():
+                print cat.slug
         except Exception:
             print 'workflow 1 inexistente'
 
         #Category of workflow with slug workflow-10
         try:
             work = WorkFlow.objects.get(slug='workflow_10')
-            cat = work.category
-            print cat.slug
+            for cat in work.category.all():
+                print cat.slug
         except Exception:
             print 'workflow_10 inexistente'
 

@@ -7,8 +7,9 @@
 
 	{% if result %}
 
-		<div class="pure-u-2-5">
+		<div id="sidebar" class="pure-u-2-5">
 			<scipion-workflow src="/workflow_download_json/{{ workflow.id }}/{{ workflow.slug }}/" height="400px" width="95%"></scipion-workflow>
+			<img src="{% static "images/carlosIII.jpeg" %}" alt="Picture of Carlos III" />
 		</div>
 
 	{% else %}
@@ -20,15 +21,15 @@
 
 {% block main_block %}
 
-	<div class="pure-u-3-5">
+	<div id="main" class="pure-u-3-5">
 
 		{% if result %}
 		
 			<h1>{{ workflow.name }}</h1>
 
 			<h2>
-				{% for category in workflow.category %}
-			    	<a href="/workflow_list/{{ category.slug }}/">category.name</a>
+				{% for cat in categories %}
+			    	<a href="{% url 'workflow_list' cat.slug %}">{{ cat.name }}</a>
 			    {% endfor %}	
 			</h2>
 
@@ -36,9 +37,8 @@
 
 			<span style="font-weight:bold"> Description: </span> {{ workflow.description }}<p></p>
 
-			<form action="/workflow_download/{{ workflow.id }}/{{ workflow.slug }}/" method="post">
-	        	<div class="g-recaptcha" data-sitekey="6Lfz-3QUAAAAAK5ZTB2M47Cy0gd9Em-hjqwuBjiR"></div><br>
-	        	<input type="submit" value="Download" >
+			<form action="/workflow_download/12/workflow12/" method="post">
+	           <input type="submit" value="Download" >
 	        </form>
 
 
