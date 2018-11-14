@@ -30,10 +30,10 @@ SEARCH_TEXTBOX_NAME='key'
 SEARCH_BUTTOM_NAME='byName'
 LABEL_UPLOAD_WORFLOW = "Upload workflow"
 
-CHROMEDRIVER="/home/roberto/bin/chromedriver"
+CHROMEDRIVER="/home/adrian/chromedriver"
 WAITFOR = 1
 BASE_LOCAL_URL = "http://127.0.0.1:8000/"
-BASE_REMOTE_URL = "https://frozen-earth-51137.herokuapp.com/"
+BASE_REMOTE_URL = "https://guarded-bayou-62436.herokuapp.com/"
 BASE_URL = BASE_REMOTE_URL
 #DO NOT MODIFIED THE CODE BELLOW THIS POINT
 
