@@ -2,7 +2,26 @@
 
 {% load staticfiles %}
 
-{% block title %}Workflows{% endblock %}
+{% block title %}List{% endblock %}
+
+{% block form_block %}
+    {% if form %}
+        <div class="search">
+            <form action="{% url 'workflow_search' %}" method="post">
+                {% csrf_token %}
+                {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+                {% for field in form.visible_fields %}
+                    {{ field.errors }}
+                    {{ field.help_text }}
+                    {{ field }}
+                {% endfor %}
+                <input type="submit" name="searchByName" value="Search by name">
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}
 
 {% block side_block %}
 
@@ -46,7 +65,7 @@
                 {% for workflow in workflows %}
                     <div class="item"><p>
                         <a href="{% url 'workflow_detail' workflow.id workflow.slug %}"> {{ workflow.name }}</a>:
-                        {{ workflow.description|truncate(255) }}</p>
+                        {{ workflow.description|truncatechars:255 }}</p>
                     </div>
                 {% endfor %}
 

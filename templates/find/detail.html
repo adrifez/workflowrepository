@@ -2,50 +2,62 @@
 
 {% load staticfiles %}
 
+{% block title %}Detail{% endblock %}
+
+{% block form_block %}
+    {% if form %}
+        <div class="search">
+            <form action="{% url 'workflow_search' %}" method="post">
+                {% csrf_token %}
+                {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+                {% for field in form.visible_fields %}
+                    {{ field.errors }}
+                    {{ field.help_text }}
+                    {{ field }}
+                {% endfor %}
+                <input type="submit" name="searchByName" value="Search by name">
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}
 
 {% block side_block %}
-
-	{% if result %}
-
-		<div id="sidebar" class="pure-u-2-5">
-			<scipion-workflow src="/workflow_download_json/{{ workflow.id }}/{{ workflow.slug }}/" height="400px" width="95%"></scipion-workflow>
-			<img src="{% static "images/carlosIII.jpeg" %}" alt="Picture of Carlos III" />
-		</div>
-
-	{% else %}
-		<p><strong>{{ error }}</strong></p>
-
-	{% endif %}	
-
+    {% if result %}
+        <div id="sidebar" class="pure-u-2-5">
+            <scipion-workflow src="/workflow_download_json/{{ workflow.id }}/{{ workflow.slug }}/" height="400px" width="95%"></scipion-workflow>
+            <img src="{% static "images/carlosIII.jpeg" %}" alt="Picture of Carlos III" />
+        </div>
+    {% endif %}    
 {% endblock %}
 
 {% block main_block %}
 
-	<div id="main" class="pure-u-3-5">
+    <div id="main" class="pure-u-3-5">
 
-		{% if result %}
-		
-			<h1>{{ workflow.name }}</h1>
+        {% if result %}
+        
+            <h1>{{ workflow.name }}</h1>
 
-			<h2>
-				{% for cat in categories %}
-			    	<a href="{% url 'workflow_list' cat.slug %}">{{ cat.name }}</a>
-			    {% endfor %}	
-			</h2>
+            <h2>
+                {% for cat in categories %}
+                    <a href="{% url 'workflow_list' cat.slug %}">{{ cat.name }}</a>
+                {% endfor %}    
+            </h2>
 
-			<span style="font-weight:bold"> KeyWords: </span> {{ workflow.keywords }}<p></p>
+            <span style="font-weight:bold"> KeyWords: </span> {{ workflow.keywords }}<p></p>
 
-			<span style="font-weight:bold"> Description: </span> {{ workflow.description }}<p></p>
+            <span style="font-weight:bold"> Description: </span> {{ workflow.description }}<p></p>
 
-			<form action="/workflow_download/12/workflow12/" method="post">
-	           <input type="submit" value="Download" >
-	        </form>
+            <form action="/workflow_download/12/workflow12/" method="post">
+               <input type="submit" value="Download" >
+            </form>
 
 
-		{% else %}
-			<p><strong>No results</strong></p>
+        {% else %}
+            <p><strong>No results</strong></p>
+        {% endif %}
 
-		{% endif %}
-
-	</div>
+    </div>
 {% endblock %}

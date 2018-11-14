@@ -8,7 +8,7 @@ import json
 
 from data.models import Category, WorkFlow
 
-from rango.forms import SearchForm
+from find.forms import SearchForm
 
 # Create your views here.
 
@@ -19,32 +19,33 @@ def workflow_list(request, category_slug=None):
     workflows = None
     found = True
     error = ''
+    form = SearchForm()
 
     if category_slug == None:
         try:
             workflows = WorkFlow.objects.all()
         except Exception:
             found = False
-            error += 'No existen workflows en la base de datos'
+            error += 'No existen workflows en la base de datos. '
 
     else:
         try:
             category = Category.objects.get(slug=category_slug)
         except Exception:
             found = False
-            error += 'Busqueda de categoria con slug ' + category_slug + ' fallida'
+            error += 'Busqueda de categoria con slug ' + category_slug + ' fallida. '
         else:
             try:
                 workflows = WorkFlow.objects.filter(category=category)
             except Exception:
                 found = False
-                error += 'Busqueda de los workflows con categoria con slug ' + category_slug + ' fallida'
+                error += 'Busqueda de los workflows con categoria con slug ' + category_slug + ' fallida. '
 
     try:
         categories = Category.objects.all()
     except Exception:
         found = False
-        error += 'No existen categorias en la base de datos'
+        error += 'No existen categorias en la base de datos. '
 
     _dict = {'category': category,  # category associated to category_slug
         'categories': categories,   # list with all categories
@@ -53,8 +54,11 @@ def workflow_list(request, category_slug=None):
         'workflows': workflows,     # all workflows associated to category
                                     # category_slug
         'result': found,            # False if no workflow satisfices the query
-        'error': error              # message to display if results == False
+        'error': error,             # message to display if results == False
+        'form': form
     }
+
+    print form.visible_fields
 
     return render(request, 'find/list.html', _dict)
 
@@ -64,6 +68,7 @@ def workflow_detail(request, id, slug):
     workflow = None
     error = ''
     cats = []
+    form = SearchForm()
 
     try:
         workflow = WorkFlow.objects.get(slug=slug)
@@ -71,40 +76,50 @@ def workflow_detail(request, id, slug):
             cats.append(cat)
     except Exception:
             result = False
-            error += 'No existe ese workflow en la base de datos'
+            error += 'No existe ese workflow en la base de datos. '
 
     #query that returns the workflow with id=id
     _dict = {}
     _dict['result'] = result        # False if no workflow satisfices the query
     _dict['workflow'] = workflow    # workflow with id = id
     _dict['error'] = error          # message to display if results == False
-    _dict['categories'] = cats      # LOS ZETAS
+    _dict['categories'] = cats
+    _dict['form'] = form
 
     return render(request, 'find/detail.html', _dict)
 
-def workflow_search (request):
-    form = SearchForm()
-
-    _dict = {}
-    result = False;
+def workflow_search(request):
+    #Your code goes here
+    result = True
     workflow = None
     error = ''
+    cats = []
+    form = SearchForm()
 
     if request.method == 'POST':
-        form = SearchForm(request.POST)
-        #No se si hacerlo como en SI (estoy esperando al profe)
-        #request.POST.get(nombre_input)
+        
+        try:
+            form = SearchForm(request.POST)
+            f = str(form)
+            start = f.find('name="name" value="') + 19
+            end = f.find('"', start)
+            name = f[start:end]
+            workflow = WorkFlow.objects.get(name=name)
+            for cat in workflow.category.all():
+                cats.append(cat)
+        except Exception:
+                result = False
+                error += 'No existe ese workflow en la base de datos. '
 
-        if form.is_valid():
-            workflow = WorkFlow.objects.get(name=form.search)
-            result = True;
+    else:
+        result = False
+        error += 'Se necesita metodo POST. '
 
-        else:
-            error = 'No results'
+    _dict = {}
+    _dict['result'] = result      # False if no workflow satisfices the query
+    _dict['workflow'] = workflow  # workflow with name = name
+    _dict['error'] = error        # message to display if results == False
+    _dict['categories'] = cats
+    _dict['form'] = form
 
-        _dict[’result’] = result      # False if no workflow satisfices the query
-        _dict[’workflow’] = workflow  # workflow with name = name
-        _dict[’error’] = error        # message to display if results == False
-
-
-    return render(request, ’find/detail.html’, _dict)
+    return render(request, 'find/detail.html', _dict)

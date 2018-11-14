@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>
-            Data - {% block title %}Base{% endblock %}
+            {% block title %}Base{% endblock %}
         </title>
         <link rel="stylesheet" href="/static/css/mycss.css">
     </head>
@@ -16,12 +16,7 @@
 
 
         <div id="subheader">
-            <div class="search">
-                <form action="{% url 'worflow_search' %}" method="post">
-                    Search Workflow <input type="text" name="key" maxlength="128">
-                    <input type="submit" name="byName" value="by Name">
-                </form>
-               </div>
+            {% block form_block %}{% endblock %}
         </div>
 
 
