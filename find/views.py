@@ -99,10 +99,10 @@ def workflow_search(request):
         try:
             form = SearchForm(request.POST)
             f = str(form)
-            start = f.find('name="name" value="') + 19
+            start = f.find('name="key" value="') + 18
             end = f.find('"', start)
-            name = f[start:end]
-            workflow = WorkFlow.objects.get(name=name)
+            key = f[start:end]
+            workflow = WorkFlow.objects.get(name=key)
             for cat in workflow.category.all():
                 cats.append(cat)
         except Exception:

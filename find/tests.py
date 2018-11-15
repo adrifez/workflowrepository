@@ -117,7 +117,7 @@ class FindTests(TestCase):
         workflows = WorkFlow.objects.all()
         for workflow in workflows:
             response = self._client.post(reverse(WORKFLOW_SEARCH),
-                                                {'name': workflow.name})
+                                                {'key': workflow.name})
             print ("Search for workflow %s" % workflow.slug)
             self.assertIn(workflow.name,str(response.content))
             self.assertIn(workflow.description,
