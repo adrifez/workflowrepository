@@ -35,7 +35,7 @@
             {% if categories %}
                 {% for cat in categories %}
                     <li>
-                        <a title="tooltip_ {{ cat.name }}" href="{% url 'workflow_list' cat.slug %}">{{ cat.name }}</a>
+                        <a title="tooltip_{{ cat.name }}" href="{% url 'workflow_list_by_category' cat.slug %}">{{ cat.name }}</a>
                     </li>
                 {% endfor %}
 
@@ -64,7 +64,7 @@
 
                 {% for workflow in workflows %}
                     <div class="item"><p>
-                        <a href="{% url 'workflow_detail' workflow.id workflow.slug %}"> {{ workflow.name }}</a>:
+                        <a href="{% url 'workflow_detail' workflow.id workflow.slug %}">{{ workflow.name }}</a>:
                         {{ workflow.description|truncatechars:255 }}</p>
                     </div>
                 {% endfor %}
@@ -75,13 +75,13 @@
 
         <div id="pagination">
             <ul>
-                <li class="disabled"><span>«</span></li>
+                <li class="disabled"><span>:</span></li>
 
                 <li class="active"><span>1 <span class="sr-only">(current),</span></span></li>
 
                 <li><a href="?page=2">2,</a></li>
 
-                <li><a href="?page=2">»</a></li>
+                <li><a href="?page=2">:</a></li>
             </ul>
         </div>
     </div>

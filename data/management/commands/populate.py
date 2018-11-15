@@ -86,13 +86,13 @@ deserunt mollit anim id est laborum."""[init:end]
                 cat = random.choice(cats)
                 ip = ".".join(str(random.randint(0, 255)) for _ in range(4))
 
-                work = WorkFlow.objects.get_or_create(name='workflow ' + str(i), description='description ' + str(i),
+                work = WorkFlow.objects.get_or_create(name='workflow ' + str(i), description='mas de 16 caracteres jajajajajajajjajajajaja',
                     versionInit='1.0', client_ip=ip, keywords='keywords ' + str(i), json=json)[0]
                 work.category.add(cat)
                 work.save()
                 pass
             print WorkFlow.objects.all()
-        except ObjectDoesNotExist:
+        except Exception:
             print "Error al anadir workflow, no se han encontrado categorias"
 
         

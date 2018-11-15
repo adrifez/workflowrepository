@@ -42,7 +42,7 @@
 
             <h2>
                 {% for cat in categories %}
-                    <a href="{% url 'workflow_list' cat.slug %}">{{ cat.name }}</a>
+                    <a href="{% url 'workflow_list_by_category' cat.slug %}">{{ cat.name }}</a>
                 {% endfor %}    
             </h2>
 

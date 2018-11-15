@@ -58,8 +58,6 @@ def workflow_list(request, category_slug=None):
         'form': form
     }
 
-    print form.visible_fields
-
     return render(request, 'find/list.html', _dict)
 
 def workflow_detail(request, id, slug):
