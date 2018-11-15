@@ -27,7 +27,7 @@ ID_KEYWORDS = "id_keywords"
 ID_NAME = "id_name"
 ID_VERSION = "id_versionInit"
 SEARCH_TEXTBOX_NAME='key'
-SEARCH_BUTTOM_NAME='key'
+SEARCH_BUTTOM_NAME='byName'
 LABEL_UPLOAD_WORFLOW = "Upload workflow"
 
 CHROMEDRIVER="/home/adrian/chromedriver"
