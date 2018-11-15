@@ -99,7 +99,7 @@ def workflow_search(request):
         try:
             form = SearchForm(request.POST)
             f = str(form)
-            start = f.find('name="key" value="') + 18
+            start = f.find('name="key" value="') + 19
             end = f.find('"', start)
             key = f[start:end]
             workflow = WorkFlow.objects.get(name=key)
