@@ -95,7 +95,7 @@ def workflow_search(request):
     form = SearchForm()
 
     if request.method == 'POST':
-        
+
         try:
             form = SearchForm(request.POST)
             f = str(form)
@@ -122,3 +122,29 @@ def workflow_search(request):
     _dict['form'] = form
 
     return render(request, 'find/detail.html', _dict)
+
+
+# Download worflow
+def workflow_download(request , id , slug , count = True ):
+    error = ''
+    worlflow = None
+    # Buscamos en la base de datos el workflow correspondiente
+    try:
+        workflow = WorkFlow.objects.get(slug=slug)
+        print workflow
+
+    except Exception:
+            count = False
+            error += 'No existe ese workflow en la base de datos.'
+
+    if count == True:
+        workflow.downloads = workflow.downloads + 1
+        workflow.save()
+
+        response = HttpResponse(workflow.json, content_type=" application / octet−stream")
+        fileName = "WorkFlow_"+ str(workflow.id)
+        response['Content-Disposition'] = 'inline; filename=%s' %fileName
+        return response
+
+#TODO:Devolver algo con sentido
+    return error

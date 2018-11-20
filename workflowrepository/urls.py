@@ -33,7 +33,7 @@ urlpatterns = [
     url(r'^workflow_list/(?P<category_slug>[\w\-]+)/$', findviews.workflow_list, name='workflow_list_by_category'),
     url(r'^workflow_detail/(?P<id>[\w\-]+)/(?P<slug>[\w\-]+)/$', findviews.workflow_detail, name='workflow_detail'),
     url(r'^workflow_search/$', findviews.workflow_search, name='workflow_search'),
-    #url(r'^workflow_search/(?P<name>[-\w]+)/$', findviews.workflow_search, name='workflow_search'),
+    url(r'^workflow_download/(?P<id>\d+)/(?P<slug>[-\w]+)/$', findviews.workflow_download, name='workflow_download'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

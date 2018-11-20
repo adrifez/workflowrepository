@@ -29,7 +29,7 @@
             <scipion-workflow src="/workflow_download_json/{{ workflow.id }}/{{ workflow.slug }}/" height="400px" width="95%"></scipion-workflow>
             <img src="{% static "images/carlosIII.jpeg" %}" alt="Picture of Carlos III" />
         </div>
-    {% endif %}    
+    {% endif %}
 {% endblock %}
 
 {% block main_block %}
@@ -37,20 +37,21 @@
     <div id="main" class="pure-u-3-5">
 
         {% if result %}
-        
+
             <h1>{{ workflow.name }}</h1>
 
             <h2>
                 {% for cat in categories %}
                     <a href="{% url 'workflow_list_by_category' cat.slug %}">{{ cat.name }}</a>
-                {% endfor %}    
+                {% endfor %}
             </h2>
 
             <span style="font-weight:bold"> KeyWords: </span> {{ workflow.keywords }}<p></p>
 
             <span style="font-weight:bold"> Description: </span> {{ workflow.description }}<p></p>
 
-            <form action="/workflow_download/12/workflow12/" method="post">
+            <form action="/workflow_download/{{ workflow.id }}/{{ workflow.slug }}/" method="post">
+                {% csrf_token %} 
                <input type="submit" value="Download" >
             </form>
 
