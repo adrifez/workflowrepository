@@ -98,11 +98,8 @@ def workflow_search(request):
 
         try:
             form = SearchForm(request.POST)
-            f = str(form)
-            print f
-            start = f.find('name="key" value="') + 18
-            end = f.find('"', start)
-            key = f[start:end]
+            print form
+            key = form.cleaned_data['key']
             workflow = WorkFlow.objects.get(name=key)
             for cat in workflow.category.all():
                 cats.append(cat)
