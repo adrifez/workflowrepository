@@ -5,7 +5,7 @@
 {% block title %}Add Workflows{% endblock %}
 
 {% block form_block %}
-
+<h1> </h1>
 {% endblock %}
 
 {% block side_block %}
@@ -13,26 +13,30 @@
 {% endblock %}
 
 {% block main_block %}
+  <h1>Add a WorkFlow</h1>
+  <p>(All fields are compulsory)</p>
   <div class="pure-u-3-5">
-    <form id="workflow_form" action="/add_workflow/" method="post" enctype="multipart/form-data">
+    <form id="workflow_form" action="{% url 'add_workflow' %}" method="post" enctype="multipart/form-data">      
       <input type='hidden' name='csrfmiddlewaretoken' value='JfA1OdrvHF7DKNmdOyOutQEIdQOveIIljPmag2YPPIfsFtz6JC7YOTU65gegISV3' />
       <table cellpadding="10">
         <tr><th><label for="id_name">Name:</label></th>
+        {% if error %}
+          <p class='error'><strong>{{ error }}</strong>
+        {% endif %}
           <td><input type="text" name="name" id="id_name" maxlength="128" required /></td></tr>
         <tr><th><label for="id_category">Category:</label></th>
           <td><select name="category" multiple="multiple" id="id_category" required>
-          <option value="1">category1</option>
+          {% if cats %}
+            {% for cat in cats %}
+              <option value ="{{ cat.id }}">{{ cat.name }}</option> 
+            {% endfor %}
 
-          <option value="2">category2</option>
-
-          <option value="3">category3</option>
-
-          <option value="4">category4</option>
-
-          <option value="5">category5</option>
+          {% else %}
+            <p><stong>There are no categories present</stong></p>
+          {% endif %}  
         </select></td></tr>
 
-        <tr><th><label for="id_keywords">Keywords:</label></th>ç
+        <tr><th><label for="id_keywords">Keywords:</label></th>
           <td><input type="text" name="keywords" id="id_keywords" maxlength="256" required /></td></tr>
         <tr><th><label for="id_description">Description:</label></th>
           <td><textarea name="description" cols="40" id="id_description" rows="10" maxlength="512" required></textarea></td></tr>
@@ -42,6 +46,15 @@
           <td><input type="file" name="json" id="id_json" required /></td></tr>
       </table>
       </br>
+      {% csrf_token %}
+      {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+      {% endfor %}
+      {% for field in form.visible_fields %}
+        {{ field.errors }}
+         {{ field.help_text }}
+        {{ field }}
+      {% endfor %}
       <input type="submit" name="submit_workflow" value="CreateWorkflow" />
     </form>
   </div>

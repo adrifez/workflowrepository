@@ -34,6 +34,10 @@
 
 {% block main_block %}
 
+    {% if msg %}
+        <h1>{{ msg }}</h1>
+    {% endif %}
+
     <div id="main" class="pure-u-3-5">
 
         {% if result %}

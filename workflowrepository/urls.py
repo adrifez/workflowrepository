@@ -22,6 +22,7 @@ from django.contrib import admin
 
 from data import views as dataviews
 from find import views as findviews
+from upload import views as uploadviews
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -34,6 +35,7 @@ urlpatterns = [
     url(r'^workflow_detail/(?P<id>[\w\-]+)/(?P<slug>[\w\-]+)/$', findviews.workflow_detail, name='workflow_detail'),
     url(r'^workflow_search/$', findviews.workflow_search, name='workflow_search'),
     url(r'^workflow_download/(?P<id>\d+)/(?P<slug>[-\w]+)/$', findviews.workflow_download, name='workflow_download'),
+    url(r'^add_workflow/$', uploadviews.add_workflow, name='add_workflow'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
