@@ -26,8 +26,8 @@
           <td><input type="text" name="name" id="id_name" maxlength="128" required /></td></tr>
         <tr><th><label for="id_category">Category:</label></th>
           <td><select name="category" multiple="multiple" id="id_category" required>
-          {% if cats %}
-            {% for cat in cats %}
+          {% if categories %}
+            {% for cat in categories %}
               <option value ="{{ cat.id }}">{{ cat.name }}</option> 
             {% endfor %}
 

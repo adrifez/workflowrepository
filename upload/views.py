@@ -43,27 +43,26 @@ def add_workflow(request):
             except Exception:
                 result = False
                 error += 'Workflow  with this name alredy exists'
-                for cat in Category.objects.all():
-                    cats.append(cat)
 
             if result == True:
                 for cat in workflow.category.all():
                     cats.append(cat)
+            else:
+                cats = list(Category.objects.all())        
 
             #Formamos el diccionario
             _dict = {}
             _dict['result'] = result        # False if no workflow satisfices the query
             _dict['workflow'] = workflow    # workflow with id = id
-            _dict['error'] = error          # message to display if results == False
+            _dict['error'] = error         # message to display if results == False
             _dict['categories'] = cats
 
     
-            if result == False:   
+            if result == False:
                 return render(request, 'upload/add_workflow.html', _dict)
 
             _dict['form'] = formSearch
             _dict['msg'] = 'Workflow %s successfully uploaded' %(workflow.name)
-            print _dict['msg']
 
             return render(request, 'find/detail.html', _dict)
 
@@ -72,6 +71,6 @@ def add_workflow(request):
 
     #Como es un GET, tenemos que coger todas las categorias de la base de datos
     context_dict = {}
-    context_dict['cats'] = list(Category.objects.all())
+    context_dict['categories'] = list(Category.objects.all())
     return render(request, 'upload/add_workflow.html', context_dict)
 
